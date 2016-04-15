@@ -2,7 +2,7 @@ package com.tsetsova.twitter;
 
 import java.util.*;
 
- class User {
+class User {
 
      private String username;
      private ArrayList<String> tweets = new ArrayList<>();
@@ -10,6 +10,9 @@ import java.util.*;
      User(String username) {
         this.username = username;
     }
+
+
+
 
      public String name() { return username; }
 
