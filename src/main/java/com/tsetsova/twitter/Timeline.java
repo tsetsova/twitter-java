@@ -23,7 +23,7 @@ class Timeline {
     }
 
     void save(String status) {
-        Tweet tweet = new Tweet(status);
+        Tweet tweet = new Tweet(status, this.username);
         tweets.add(tweet);
     }
 
