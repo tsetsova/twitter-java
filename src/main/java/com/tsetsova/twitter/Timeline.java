@@ -18,7 +18,7 @@ class Timeline {
     List<String> display() {
 
         return tweets.stream()
-              .map( tweet -> format(tweet.status) )
+              .map( tweet -> format(tweet.status, tweet.timestamp) )
               .collect(Collectors.toList());
     }
 
@@ -27,8 +27,8 @@ class Timeline {
         tweets.add(tweet);
     }
 
-    private String format(String status) {
-        return String.format("@%s said '%s'", this.username, status);
+    private String format(String status, String timestamp) {
+        return String.format("%s: @%s said '%s'", timestamp, this.username, status);
     }
 
 
