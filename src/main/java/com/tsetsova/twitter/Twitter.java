@@ -17,7 +17,8 @@ public class Twitter {
        while (!command.equalsIgnoreCase("quit")) {
            switch(command) {
                case "timeline":
-                   System.out.println(user.timeline());
+                   if (user.timeline().isEmpty()) {System.out.println("No tweets yet! Say 'tweet' to tweet!");}
+                   user.timeline().forEach(System.out::println);
                    break;
                case "tweet":
                    System.out.println("What's on your mind?");
