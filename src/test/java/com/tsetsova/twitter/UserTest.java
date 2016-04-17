@@ -64,7 +64,7 @@ public class UserTest {
     }
 
     String time() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime());
     }

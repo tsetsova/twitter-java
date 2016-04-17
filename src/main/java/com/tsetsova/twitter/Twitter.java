@@ -1,9 +1,6 @@
 package com.tsetsova.twitter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Twitter {
 
@@ -34,10 +31,7 @@ public class Twitter {
                     find();
                     break;
                 case "follow":
-                    System.out.println("Which user would you like to follow?");
-                    String username = reader.next();
-                    User foundUser = searchUser(username);
-                    current_user.follow(foundUser);
+                    follow();
                     break;
                 case "sign out":
                     signOut();
@@ -53,13 +47,85 @@ public class Twitter {
         }
     }
 
+
+    private void login() {
+        System.out.println("Hi, to tweet, please enter your username:");
+        String username = reader.next().replaceAll("\\s", "");
+        current_user = findOrCreateUser(username);
+        System.out.println("Hello " + username);
+    }
+
+    private User findOrCreateUser(String username) {
+        return searchUser(username)
+                .orElse(createUser(username));
+    }
+
+
+    private Optional<User> searchUser(String username) {
+        return users.stream()
+                .filter(user -> user.username.equalsIgnoreCase(username))
+                .findFirst();
+    }
+
+    private User createUser(String username) {
+        User user = new User(username);
+        users.add(user);
+        return user;
+    }
+
+    private String userCommand() {
+        printCommands();
+        return reader.next();
+    }
+
+    private void printCommands() {
+        System.out.println("The commands I understand are:");
+        commands.forEach(System.out::println);
+    }
+
+    private void timeline(User user) {
+        if (user.timeline().isEmpty()) {
+            System.out.println("No tweets yet! Say 'tweet' to tweet!");
+        }
+        user.timeline().forEach(System.out::println);
+    }
+
+    private void tweet() {
+        System.out.println("What's on your mind?");
+        String status = reader.next();
+        current_user.tweet(status);
+        String tweet = String.format("@%s said '%s'", current_user.username, status);
+        System.out.println(tweet);
+    }
+
     private void find() {
         System.out.println("Please type in a username");
         String username = reader.next();
-        User foundUser = searchUser(username);
-        System.out.println("Here is " + username + "'s timeline");
-        timeline(foundUser);
-        System.out.println("To follow " + username + " write follow and their username");
+        User foundUser = searchUser(username).get();
+        if (foundUser == null) {
+            System.out.println(username + " not found");
+        } else {
+            System.out.println("Here is " + username + "'s timeline");
+            timeline(foundUser);
+            System.out.println("To follow " + username + " write follow and their username");
+        }
+    }
+
+    private void follow() {
+        System.out.println("Which user would you like to follow?");
+        String username = reader.next();
+        User foundUser = searchUser(username).get();
+        current_user.follow(foundUser);
+        if (foundUser == null) {
+            System.out.println(username + " not found");
+        } else {
+            System.out.println(username + " followed!");
+        }
+    }
+
+    private void signOut() {
+        System.out.println("Signed out, your tweets have been saved.");
+        user_interaction();
     }
 
     private boolean exit() {
@@ -73,57 +139,5 @@ public class Twitter {
         return false;
     }
 
-    private void timeline(User user) {
-        if (user.timeline().isEmpty()) {
-            System.out.println("No tweets yet! Say 'tweet' to tweet!");
-        }
-        user.timeline().forEach(System.out::println);
-    }
-
-    private void signOut() {
-        System.out.println("Signed out, your tweets have been saved.");
-        user_interaction();
-    }
-
-    private void tweet() {
-        System.out.println("What's on your mind?");
-        String status = reader.next();
-        current_user.tweet(status);
-        String tweet = String.format("@%s said '%s'", current_user.username, status);
-        System.out.println(tweet);
-    }
-
-
-    private String userCommand() {
-        printCommands();
-        return reader.next();
-    }
-
-    private void printCommands() {
-        System.out.println("The commands I understand are:");
-        commands.forEach(System.out::println);
-    }
-
-    private void login() {
-        System.out.println("Hi, to tweet, please enter your username:");
-        String username = reader.next().replaceAll("\\s", "");
-
-        current_user = searchUser(username);
-
-        System.out.println("Hello " + username);
-    }
-
-    private User searchUser(String username) {
-        return users.stream()
-                .filter(user -> user.username.equalsIgnoreCase(username))
-                .findFirst()
-                .orElse(createUser(username));
-    }
-
-    private User createUser(String username) {
-        User user = new User(username);
-        users.add(user);
-        return user;
-    }
 
 }

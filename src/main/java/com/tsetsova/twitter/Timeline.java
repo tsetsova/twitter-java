@@ -18,8 +18,10 @@ class Timeline {
 
     List<String> display() {
         return tweets.stream()
-              .map( tweet -> format(tweet.status, tweet.username, tweet.timestamp) )
-              .collect(Collectors.toList());
+                .sorted((tweet1, tweet2) -> tweet1.timestamp
+                        .compareTo(tweet2.timestamp))
+                .map(tweet -> format(tweet.status, tweet.username, tweet.timestamp))
+                .collect(Collectors.toList());
     }
 
     private String format(String status, String username, String timestamp) {
