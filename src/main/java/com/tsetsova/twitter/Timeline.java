@@ -17,20 +17,17 @@ class Timeline {
     }
 
     List<String> display() {
-
         return tweets.stream()
-              .map( tweet -> format(tweet.status, tweet.timestamp) )
+              .map( tweet -> format(tweet.status, tweet.username, tweet.timestamp) )
               .collect(Collectors.toList());
     }
 
-
-
-    private String format(String status, String timestamp) {
-        return String.format("%s @%s said '%s'", timestamp, this.username, status);
+    private String format(String status, String username, String timestamp) {
+        return String.format("%s @%s said '%s'", timestamp, username, status);
     }
 
 
-//    public void add(List<String> otherTweets) {
-//
-//    }
+    public void add(List<Tweet> otherTweets) {
+        otherTweets.forEach(tweet -> tweets.add(tweet));
+    }
 }

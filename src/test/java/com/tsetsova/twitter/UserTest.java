@@ -13,28 +13,35 @@ import static org.junit.Assert.assertEquals;
 public class UserTest {
 
     private User user;
+    private String userStatus;
+    private String userTweet;
+
+    private String otherUserStatus;
     private User otherUser;
+    private String otherUserTweet;
 
     @Before public void setUp() {
         user = new User("Spike");
+        userStatus = user.tweet("typeof(NaN) is a number because... javascript..");
+        userTweet = time() + " @Spike said 'typeof(NaN) is a number because... javascript..'";
         otherUser = new User("Leo");
+        otherUserStatus = otherUser.tweet("What would Thoughtbot do?");
+        otherUserTweet = time() + " @Leo said 'What would Thoughtbot do?'";
     }
 
     @Test
     public void shouldReturnUserName(){
-        assertEquals("Spike", user.name() );
+        assertEquals("Spike", user.name());
     }
 
     @Test
     public void canTweet() {
-        user.tweet("typeof(NaN) is a number because... javascript..");
-        assertEquals("typeof(NaN) is a number because... javascript..", user.tweets.get(0).status);
+        assertEquals(userStatus, user.tweets.get(0).status);
     }
 
     @Test
     public void hasATimeline() {
-        user.tweet("typeof(NaN) is a number because... javascript..");
-        assertEquals(time() + " @Spike said 'typeof(NaN) is a number because... javascript..'", user.timeline().get(0));
+        assertEquals(userTweet, user.timeline().get(0));
     }
 
     @Test
@@ -48,6 +55,12 @@ public class UserTest {
         user.follow(otherUser);
         user.follow(otherUser);
         assertEquals(1, user.following.size());
+    }
+
+    @Test
+    public void canSeeAnAggregatedTimeline() {
+        user.follow(otherUser);
+        assertEquals(true, user.timeline().contains(otherUserTweet));
     }
 
     String time() {

@@ -23,12 +23,13 @@ class User {
     }
 
 
-    void tweet(String tweet) {
+    String tweet(String tweet) {
         save(tweet);
+        return tweet;
     }
 
     void save(String status) {
-        Tweet tweet = new Tweet(status);
+        Tweet tweet = new Tweet(status, this.username);
         tweets.add(tweet);
     }
 
@@ -36,6 +37,6 @@ class User {
           if (!following.contains(user)) {
                 following.add(user);
             }
-//        timeline.add(user.tweets);
+        timeline.add(user.tweets);
     }
 }
