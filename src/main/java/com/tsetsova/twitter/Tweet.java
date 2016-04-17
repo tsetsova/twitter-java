@@ -9,13 +9,11 @@ import java.util.Calendar;
 class Tweet {
 
     String status;
-    String username;
     String timestamp;
 
 
-    Tweet(String status, String username) {
+    Tweet(String status) {
         this.status = status;
-        this.username = username;
         this.timestamp = time();
     }
 

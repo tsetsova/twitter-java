@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Twitter {
 
     List<User> users = new ArrayList<>();
-    List<String> commands = Arrays.asList("tweet", "timeline", "search <username>", "sign out", "exit");
+    List<String> commands = Arrays.asList("tweet", "timeline", "search", "follow", "sign out", "exit");
     User current_user;
     Scanner reader = new Scanner(System.in).useDelimiter("\\n");
 
@@ -33,6 +33,12 @@ public class Twitter {
                 case "find":
                     find();
                     break;
+                case "follow":
+                    System.out.println("Which user would you like to follow?");
+                    String username = reader.next();
+                    User foundUser = searchUser(username);
+                    current_user.follow(foundUser);
+                    break;
                 case "sign out":
                     signOut();
                     break;
@@ -53,6 +59,7 @@ public class Twitter {
         User foundUser = searchUser(username);
         System.out.println("Here is " + username + "'s timeline");
         timeline(foundUser);
+        System.out.println("To follow " + username + " write follow and their username");
     }
 
     private boolean exit() {

@@ -13,9 +13,11 @@ import static org.junit.Assert.assertEquals;
 public class UserTest {
 
     private User user;
+    private User otherUser;
 
     @Before public void setUp() {
         user = new User("Spike");
+        otherUser = new User("Leo");
     }
 
     @Test
@@ -28,6 +30,19 @@ public class UserTest {
         user.tweet("typeof(NaN) is a number because... javascript..");
         assertEquals(time() + " @Spike said 'typeof(NaN) is a number because... javascript..'", user.timeline().get(0));
 
+    }
+
+    @Test
+    public void canFollowOtherUsers() {
+        user.follow(otherUser);
+        assertEquals(otherUser, user.following.get(0));
+    }
+
+    @Test
+    public void cantFollowTheSameUserTwice() {
+        user.follow(otherUser);
+        user.follow(otherUser);
+        assertEquals(1, user.following.size());
     }
 
     String time() {
