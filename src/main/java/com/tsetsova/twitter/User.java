@@ -4,7 +4,7 @@ import java.util.*;
 
 class User {
 
-    private String username;
+    String username;
     private Timeline timeline;
 
     User(String username) {
