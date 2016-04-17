@@ -28,8 +28,13 @@ public class UserTest {
     @Test
     public void canTweet() {
         user.tweet("typeof(NaN) is a number because... javascript..");
-        assertEquals(time() + " @Spike said 'typeof(NaN) is a number because... javascript..'", user.timeline().get(0));
+        assertEquals("typeof(NaN) is a number because... javascript..", user.tweets.get(0).status);
+    }
 
+    @Test
+    public void hasATimeline() {
+        user.tweet("typeof(NaN) is a number because... javascript..");
+        assertEquals(time() + " @Spike said 'typeof(NaN) is a number because... javascript..'", user.timeline().get(0));
     }
 
     @Test
