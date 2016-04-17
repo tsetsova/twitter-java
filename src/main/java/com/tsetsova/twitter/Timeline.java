@@ -28,7 +28,7 @@ class Timeline {
     }
 
     private String format(String status, String timestamp) {
-        return String.format("%s: @%s said '%s'", timestamp, this.username, status);
+        return String.format("%s @%s said '%s'", timestamp, this.username, status);
     }
 
 
