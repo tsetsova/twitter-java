@@ -5,7 +5,7 @@ import java.util.*;
 public class Twitter {
 
     List<User> users = new ArrayList<>();
-    List<String> commands = Arrays.asList("tweet", "timeline", "search", "follow", "sign out", "exit");
+    List<String> commands = Arrays.asList("tweet", "timeline", "find", "follow", "sign out", "exit");
     User current_user;
     Scanner reader = new Scanner(System.in).useDelimiter("\\n");
 
@@ -101,25 +101,25 @@ public class Twitter {
     private void find() {
         System.out.println("Please type in a username");
         String username = reader.next();
-        User foundUser = searchUser(username).get();
-        if (foundUser == null) {
-            System.out.println(username + " not found");
-        } else {
+        if (searchUser(username).isPresent()) {
+            User foundUser = searchUser(username).get();
             System.out.println("Here is " + username + "'s timeline");
             timeline(foundUser);
-            System.out.println("To follow " + username + " write follow and their username");
+            System.out.println("To follow " + username + " write follow");
+        } else {
+            System.out.println(username + " not found");
         }
     }
 
     private void follow() {
         System.out.println("Which user would you like to follow?");
         String username = reader.next();
-        User foundUser = searchUser(username).get();
-        current_user.follow(foundUser);
-        if (foundUser == null) {
-            System.out.println(username + " not found");
-        } else {
+        if (searchUser(username).isPresent()) {
+            User foundUser = searchUser(username).get();
+            current_user.follow(foundUser);
             System.out.println(username + " followed!");
+        } else {
+            System.out.println(username + " not found");
         }
     }
 
