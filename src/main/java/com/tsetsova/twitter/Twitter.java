@@ -25,10 +25,13 @@ public class Twitter {
         while (!command.equalsIgnoreCase("quit")) {
             switch (command) {
                 case "timeline":
-                    timeline();
+                    timeline(current_user);
                     break;
                 case "tweet":
                     tweet();
+                    break;
+                case "find":
+                    find();
                     break;
                 case "sign out":
                     signOut();
@@ -44,6 +47,14 @@ public class Twitter {
         }
     }
 
+    private void find() {
+        System.out.println("Please type in a username");
+        String username = reader.next();
+        User foundUser = searchUser(username);
+        System.out.println("Here is " + username + "'s timeline");
+        timeline(foundUser);
+    }
+
     private boolean exit() {
         System.out.println("Are you sure? All your tweets will be lost. Say 'Yes' to confirm exit.");
         String exitResponse = reader.next();
@@ -55,11 +66,11 @@ public class Twitter {
         return false;
     }
 
-    private void timeline() {
-        if (current_user.timeline().isEmpty()) {
+    private void timeline(User user) {
+        if (user.timeline().isEmpty()) {
             System.out.println("No tweets yet! Say 'tweet' to tweet!");
         }
-        current_user.timeline().forEach(System.out::println);
+        user.timeline().forEach(System.out::println);
     }
 
     private void signOut() {
@@ -90,12 +101,16 @@ public class Twitter {
         System.out.println("Hi, to tweet, please enter your username:");
         String username = reader.next().replaceAll("\\s", "");
 
-        current_user = users.stream()
+        current_user = searchUser(username);
+
+        System.out.println("Hello " + username);
+    }
+
+    private User searchUser(String username) {
+        return users.stream()
                 .filter(user -> user.username.equalsIgnoreCase(username))
                 .findFirst()
                 .orElse(createUser(username));
-
-        System.out.println("Hello " + username);
     }
 
     private User createUser(String username) {
