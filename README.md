@@ -28,8 +28,76 @@ or in Intellij
 * timeline
 * find
 * follow
-* sing out
+* sign out
 * exit
+
+
+## Example Interaction:
+
+Hi, to tweet, please enter your username:
+Spike
+Hello Spike
+The commands I understand are:
+tweet
+timeline
+find
+follow
+sign out
+exit
+tweet
+What's on your mind?
+Coding is cool!
+@Spike said 'Coding is cool!'
+timeline
+18/04/2016 07:46:55 @Spike said 'Coding is cool!'
+tweet
+What's on your mind?
+more horsees
+@Spike said ‘clean code’s the best book ever!'
+timeline
+18/04/2016 07:46:55 @Spike said 'Coding is cool!'
+18/04/2016 07:47:04 @Spike said ‘clean code’s the best book ever!'
+sign out
+Signed out, your tweets have been saved.
+Hi, to tweet, please enter your username:
+Leo
+Hello Leo
+The commands I understand are:
+tweet
+timeline
+find
+follow
+sign out
+exit
+tweet
+What's on your mind?
+What would Thoughtbot do?
+@Leo said 'What would Thoughtbot do?'
+help
+Sorry did you mean one of these commands?
+The commands I understand are:
+tweet
+timeline
+find
+follow
+sign out
+exit
+timeline
+18/04/2016 07:47:18 @Leo said 'What would Thoughtbot do?'
+follow
+Which user would you like to follow?
+Spike
+Spike followed!
+follow
+Which user would you like to follow?
+owrifjoiwejfo
+owrifjoiwejfo not found
+timeline
+18/04/2016 07:46:55 @Spike said 'Coding is cool!'
+18/04/2016 07:47:04 @Spike said ‘clean code’s the best book ever!'
+18/04/2016 07:47:18 @Leo said 'What would Thoughtbot do?'
+sign out
+Signed out, your tweets have been saved.
 
 ## If I had more time:
  * extract responsibilities out of the Twitter class
