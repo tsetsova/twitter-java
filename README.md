@@ -100,6 +100,7 @@ sign out
 Signed out, your tweets have been saved.
 ```
 ## If I had more time:
+ * Currently once the user follows another user they only receive their existing tweets, but not any new ones. I've been working on this and will get it fixed, but most probably after the deadline :) 
  * extract responsibilities out of the Twitter class
  * test the Twitter class and any extracted class/classes
 
