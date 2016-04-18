@@ -8,6 +8,7 @@ public class Twitter {
     List<String> commands = Arrays.asList("tweet", "timeline", "find", "follow", "sign out", "exit");
     User current_user;
     Scanner reader = new Scanner(System.in).useDelimiter("\\n");
+    String newLine = System.getProperty("line.separator");
 
     public static void main(String[] arguments) {
         new Twitter().user_interaction();
@@ -52,7 +53,7 @@ public class Twitter {
         System.out.println("Hi, to tweet, please enter your username:");
         String username = reader.next().replaceAll("\\s", "");
         current_user = findOrCreateUser(username);
-        System.out.println("Hello " + username);
+        System.out.println("Hello " + username + newLine);
     }
 
     private User findOrCreateUser(String username) {
@@ -81,6 +82,7 @@ public class Twitter {
     private void printCommands() {
         System.out.println("The commands I understand are:");
         commands.forEach(System.out::println);
+        System.out.println("---" + newLine);
     }
 
     private void timeline(User user) {
@@ -125,6 +127,7 @@ public class Twitter {
 
     private void signOut() {
         System.out.println("Signed out, your tweets have been saved.");
+        System.out.println("---" + newLine);
         user_interaction();
     }
 
