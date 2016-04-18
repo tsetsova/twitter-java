@@ -33,7 +33,7 @@ or in Intellij
 
 
 ## Example Interaction:
-
+```
 Hi, to tweet, please enter your username:
 Spike
 Hello Spike
@@ -98,7 +98,7 @@ timeline
 18/04/2016 07:47:18 @Leo said 'What would Thoughtbot do?'
 sign out
 Signed out, your tweets have been saved.
-
+```
 ## If I had more time:
  * extract responsibilities out of the Twitter class
  * test the Twitter class and any extracted class/classes
